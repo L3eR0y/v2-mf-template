@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
 const { VueLoaderPlugin } = require('vue-loader')
 const path = require('path')
 
@@ -35,7 +36,16 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 exclude: /node_modules/
-            }
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                  transpileOnly: true,
+                },
+                exclude: /node_modules/,
+            },
         ]
     },
     plugins: [

@@ -1,14 +1,19 @@
 <template lang="pug">
 div
-    .greet {{ message }}
+    .greet {{ compute_message }}
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: 'App',
     data() {
         return {
             message: 'Hello World'
+        }
+    },
+    computed: {
+        compute_message():string {
+            return `Message is: ${ this.message }` || ''
         }
     }
 }

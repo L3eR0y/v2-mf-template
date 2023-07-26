@@ -1,28 +1,28 @@
 <template lang="pug">
-div
-    .greet {{ compute_message }}
+.main.main--wrapper
+    router-view(v-if="authenticated")
+    div(v-else) Not logged in!!!
 </template>
 
 <script lang="ts">
 export default {
     name: 'App',
     data() {
-        return {
-            message: 'Hello World'
-        }
+        return {}
     },
     computed: {
-        compute_message():string {
-            return `Message is: ${ this.message }` || ''
+        authenticated() {
+            return this.$store.getters['auth/authenticated']
         }
-    }
+    },
+    methods: {},
 }
 </script>
 
 <style>
-.greet {
-    color: red;
-    font-weight: 500;
-    font-size: 20px;
+.main {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 </style>

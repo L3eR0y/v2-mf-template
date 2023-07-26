@@ -4,7 +4,7 @@
         NavigationBar
     .app-wrapper--body
         .side_bar
-            .side_bar__rlink(@click="onRLinkClick('administration-view')") Все доступные сервисы
+            .side_bar__rlink(@click="onRLinkClick('services')") Все доступные сервисы
             .side_bar__rlink() REMOTE APP
         .main
             router-view

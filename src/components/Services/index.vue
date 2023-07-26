@@ -3,8 +3,13 @@ div Administration View
 </template>
 
 <script lang="ts">
+  import { SMultiselectWithReset} from '@synergy/lms-ui-kit'
+
   export default {
-    name: 'AdministrationView',
+    name: 'Services',
+    components: {
+      SMultiselectWithReset,
+    },
     data() {
       return {}
     },

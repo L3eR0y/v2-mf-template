@@ -8,9 +8,9 @@ const routes = [
     children: [
       // IMPORTANT: ROUTES HERE!!!!
       {
-        name: 'administration-view',
-        path: '/administration-view',
-        component: () => import('../components/AdministrationView/index.vue')
+        name: 'services',
+        path: '/services',
+        component: () => import('../components/Services/index.vue')
       }
     ]
   }

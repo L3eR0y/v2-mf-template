@@ -3,7 +3,6 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
 const { VueLoaderPlugin } = require('vue-loader')
-const deps = require("./package.json").dependencies
 const path = require('path')
 
 module.exports = {
@@ -40,7 +39,6 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                exclude: /node_modules/
             },
             {
                 test: /\.tsx?$/,
@@ -69,10 +67,9 @@ module.exports = {
             remotes: {},
             exposes: {
                 './vue2': './node_modules/vue/dist/vue',
-                './AdministrationView': './src/components/AdministrationView/index.vue'
+                './Services': './src/components/Services/index.vue'
             },
-            shared: deps
-            // shared: require("../../package.json").dependencies
+            shared: require("./package.json").dependencies
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src', 'index.html'),

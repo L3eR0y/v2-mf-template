@@ -3,6 +3,7 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
 const { VueLoaderPlugin } = require('vue-loader')
+const deps = require("./package.json").dependencies
 const path = require('path')
 
 module.exports = {
@@ -10,6 +11,9 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[contenthash].js'
+    },
+    resolve: {
+        extensions: ['.vue', '.ts', '.tsx', '.jsx', '.js', '.json' ],
     },
     module: {
         rules: [
@@ -23,14 +27,15 @@ module.exports = {
                 use: 'pug-plain-loader',  
             },
             {
-                test: /\.(scss|css)$/,
+                test: /\.(c|sa|sc)ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader, 
-                    'style-loader', 
-                    'css-loader', 
-                    'postcss-loader', 
-                    'sass-loader'
-                ],
+                  'style-loader',
+                  {
+                    loader: 'css-loader',
+                    options: { importLoaders: 1 }
+                  },
+                  'sass-loader'
+                ]
             },
             {
                 test: /\.vue$/,
@@ -46,15 +51,28 @@ module.exports = {
                 },
                 exclude: /node_modules/,
             },
+            {
+                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+                type: 'asset/inline',
+            },
         ]
     },
     plugins: [
         new ModuleFederationPlugin({
             name: 'templateRemoteEntry',
             filename: 'templateRemoteEntry.entry.js',
+            library: { type: 'var', name: 'templateRemoteEntry' },
             remotes: {},
-            exposes: {},
-            shared: {}
+            exposes: {
+                './vue2': './node_modules/vue/dist/vue',
+                './AdministrationView': './src/components/AdministrationView/index.vue'
+            },
+            shared: deps
+            // shared: require("../../package.json").dependencies
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src', 'index.html'),
@@ -76,6 +94,7 @@ module.exports = {
         static: {
           directory: path.join(__dirname),
         },
+        historyApiFallback: true,
         compress: true,
         port: 5050,
         hot: true,

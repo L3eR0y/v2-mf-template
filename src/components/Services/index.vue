@@ -3,17 +3,21 @@ div Administration View
 </template>
 
 <script lang="ts">
-  import { SMultiselectWithReset} from '@synergy/lms-ui-kit'
-
   export default {
     name: 'Services',
-    components: {
-      SMultiselectWithReset,
-    },
+    components: {},
     data() {
-      return {}
+      return {
+        loaded: true,
+        list: []
+      }
+    },
+    async created() {
+      console.log('Created', this)
+      this.list = await this.$store.dispatch('ui/getAvailableServices')
+      this.loaded = true
     },
     computed: {},
-    methods: {}
+    methods: {},
   }
 </script>

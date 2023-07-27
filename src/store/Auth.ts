@@ -4,6 +4,7 @@ const store: { [key: string]: any } = {
   namespaced: true,
   state: (): AuthStore => ({
     authenticated: false,
+    token: '',
     user: undefined     
   }),
   mutations: {
@@ -12,7 +13,10 @@ const store: { [key: string]: any } = {
     },
     SET_USER(state: AuthStore, user: User) {
       state.user = user
-    }
+    },
+    SET_TOKEN(state: AuthStore, token: string) {
+      state.token = token
+    },
   },
   actions: {},
   getters: {
@@ -21,6 +25,9 @@ const store: { [key: string]: any } = {
     },
     user(state: AuthStore) {
       return state.user
+    }, 
+    token(state: AuthStore) {
+      return state.token
     }
   }
 }

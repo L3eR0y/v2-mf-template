@@ -5,18 +5,19 @@
 </template>
 
 <script lang="ts">
-export default {
-    name: 'App',
-    data() {
-        return {}
-    },
-    computed: {
-        authenticated() {
-            return this.$store.getters['auth/authenticated']
-        }
-    },
-    methods: {},
-}
+    export default {
+        name: 'App',
+        data() {
+            return {}
+        },
+        computed: {
+            authenticated() {
+                return this.$store.getters['auth/authenticated']
+            }
+        },
+        created() {},
+        methods: {},
+    }
 </script>
 
 <style>

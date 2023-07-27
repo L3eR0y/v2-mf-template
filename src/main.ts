@@ -8,9 +8,13 @@ import router from './routes/index'
 //Components and .vue
 import App from './App.vue'
 
-//Stores
-import UiStore from './store/Ui'
-import AuthStore from './store/Auth'
+//Store
+//Store
+import Stores from './store/index'
+
+import hostStore from 'hostRemoteEntry/HostStore'
+
+// console.log(hostStore)
 
 //Styles
 import './styles/normalize.scss'
@@ -18,20 +22,15 @@ import './styles/app.scss'
 
 //Plugins
 import KeycloakPlugin from './plugins/keycloak'
-
-
+import AxiosPlugin from './plugins/axios' 
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
-const store: Store<any> = new Vuex.Store({
-  modules: {
-    main: UiStore,
-    auth: AuthStore
-  }
-})
+const store: Store<any> = new Vuex.Store(hostStore)
 
 Vue.use(KeycloakPlugin, { store })
+Vue.use(AxiosPlugin, { store })
 
 const app: Vue = new Vue({
   router,

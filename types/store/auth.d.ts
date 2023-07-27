@@ -15,5 +15,6 @@ export interface User {
 
 export default interface Auth {
 	authenticated: boolean,
+	token: string,
   user: User | undefined
 }

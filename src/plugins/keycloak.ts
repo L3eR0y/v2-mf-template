@@ -16,10 +16,11 @@ const init_options: Keycloak.KeycloakInitOptions = {
 export default {
   install: async (Vue, { store }: { [key: string]: any }) => {
     const _keycloak = new Keycloak(keycloak_config)
-    Vue.prototype.$auth = store.state.auth
+    Vue.prototype.$auth = _keycloak
     _keycloak.init(init_options).then((auth: boolean) => {
       store.commit('auth/SET_AUTENTICATION', auth)
       store.commit('auth/SET_USER', _keycloak.idTokenParsed)
+      store.commit('auth/SET_TOKEN', `Bearer ${_keycloak.token}`)
     })
   }
 }

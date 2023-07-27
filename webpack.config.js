@@ -39,6 +39,7 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
+                exclude: /node_modules/
             },
             {
                 test: /\.tsx?$/,
@@ -63,10 +64,10 @@ module.exports = {
         new ModuleFederationPlugin({
             name: 'templateRemoteEntry',
             filename: 'templateRemoteEntry.entry.js',
-            library: { type: 'var', name: 'templateRemoteEntry' },
-            remotes: {},
+            remotes: {
+                hostRemoteEntry: "host@http://localhost:3030/hostRemoteEntry.entry.js"
+            },
             exposes: {
-                './vue2': './node_modules/vue/dist/vue',
                 './Services': './src/components/Services/index.vue'
             },
             shared: require("./package.json").dependencies
@@ -85,7 +86,7 @@ module.exports = {
             filename: '[name].[contenthash].css'
         }),
         new VueLoaderPlugin()
-        ],
+    ],
     devServer: {
         watchFiles: path.join(__dirname, 'src'),
         static: {

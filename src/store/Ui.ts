@@ -11,7 +11,6 @@ const store: { [key: string]: any } = {
     }),
     mutations: {
         SET_AVAILABLE_SERVICES(state, services) {
-            console.log('SERVICES: ', services)
             if (Array.isArray(services)) {
               services.forEach((item) => {
                 if (item.route) Set(state.available_services, item.route, item)
@@ -25,7 +24,6 @@ const store: { [key: string]: any } = {
     },
     actions: {
         async getAvailableServices({ state, commit }, params = {}) {
-            console.log('getAvailableServices ', state, commit)
             const _self_ = this._vm
             try {
                 let result = []

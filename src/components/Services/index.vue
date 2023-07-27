@@ -1,5 +1,6 @@
 <template lang="pug">
-div Administration View
+div 
+  div(v-for="el in list") {{ el.title }}
 </template>
 
 <script lang="ts">
@@ -16,6 +17,7 @@ div Administration View
       console.log('Created', this)
       this.list = await this.$store.dispatch('ui/getAvailableServices')
       this.loaded = true
+      console.log('LIST: ', this.list)
     },
     computed: {},
     methods: {},

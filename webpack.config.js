@@ -64,10 +64,10 @@ module.exports = {
     plugins: [
         new ModuleFederationPlugin({
             name: 'host',
-            remotes: {
-                templateRemoteEntry: "templateRemoteEntry@http://localhost:5050/templateRemoteEntry.entry.js"
+            filename: 'hostRemoteEntry.entry.js',
+            exposes: {
+                './HostStore': './src/store/index.ts'
             },
-            exposes: {},
             shared: {
                 vue: {
                     singleton: true

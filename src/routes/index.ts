@@ -7,11 +7,11 @@ const routes = [
     component: () => import('../pages/Home/index.vue'),
     children: [
       // IMPORTANT: ROUTES HERE!!!!
-      {
-        name: 'administration-view',
-        path: '/administration-view',
-        component: () => import('templateRemoteEntry/AdministrationView')
-      }
+      // {
+      //   name: 'services',
+      //   path: '/services',
+      //   component: () => import('templateRemoteEntry/Services')
+      // }
     ]
   }
 ]

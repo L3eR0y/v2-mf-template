@@ -4,15 +4,14 @@
         NavigationBar
     .app-wrapper--body
         .side_bar
-            .side_bar__rlink(@click="onRLinkClick('administration-view')") Все доступные сервисы
-            .side_bar__rlink() REMOTE APP
+            .side_bar__rlink(@click="onRLinkClick('services')") Все доступные сервисы
         .main
             router-view
 </template>
       
 <script lang="ts">
     import NavigationBar from '../../components/NavigationBar/index.vue'
-    
+
     export default {
         name: 'Home',
         components: {
@@ -25,7 +24,10 @@
         methods: {
             onRLinkClick(route: string):void {
                 this.$route.name !== route && this.$router.push({name: route})
-            }
+            },               
+        },
+        created() {
+            console.log('ROUTER: ', this.$router)
         }
     }
 </script>

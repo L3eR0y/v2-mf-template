@@ -20,6 +20,7 @@ export default {
     _keycloak.init(init_options).then((auth: boolean) => {
       store.commit('auth/SET_AUTENTICATION', auth)
       store.commit('auth/SET_USER', _keycloak.idTokenParsed)
+      store.commit('auth/SET_TOKEN', `Bearer ${_keycloak.token}`)
     })
   }
 }
